@@ -17,7 +17,7 @@ fn map_digits_and_words(line: &str) -> Option<u32> {
 }
 
 fn extract_numbers(line: &str, mapping_function: fn(&str) -> Option<u32>) -> Vec<u32> {
-    (0..line.len()).filter_map(|i| mapping_function(&line.chars().skip(i).take(5).collect::<String>())).collect()
+    (0..line.chars().count()).filter_map(|i| mapping_function(&line.chars().skip(i).take(5).collect::<String>())).collect()
 }
 
  fn process(input: String, mapping_function: fn(&str) -> Option<u32>) -> u64 {
