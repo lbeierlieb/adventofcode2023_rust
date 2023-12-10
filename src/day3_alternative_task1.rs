@@ -1,8 +1,7 @@
 // the taken approach is not easily adaptable to task2, thus hasn't been pursued further.
 
-
-use regex::Regex;
 use regex::Captures;
+use regex::Regex;
 
 #[derive(Debug)]
 struct Grid {
@@ -20,13 +19,16 @@ impl Grid {
         let mut chars = Vec::new();
         let (startx, starty) = self.strindex_to_coord(part.start_index);
         let len = part.len();
-        for xoffset in 0..(len+2) {
+        for xoffset in 0..(len + 2) {
             for yoffset in [0, 2] {
-                chars.push(self.get_symbol_at(startx as i32+xoffset as i32-1, starty as i32+yoffset as i32-1));
+                chars.push(self.get_symbol_at(
+                    startx as i32 + xoffset as i32 - 1,
+                    starty as i32 + yoffset as i32 - 1,
+                ));
             }
         }
-        chars.push(self.get_symbol_at(startx as i32-1, starty as i32));
-        chars.push(self.get_symbol_at(startx as i32+len as i32, starty as i32));
+        chars.push(self.get_symbol_at(startx as i32 - 1, starty as i32));
+        chars.push(self.get_symbol_at(startx as i32 + len as i32, starty as i32));
         chars.into_iter().filter_map(|c| c).collect()
     }
 
@@ -73,18 +75,26 @@ impl PartNumber {
 
 pub fn task_one(input: String) -> u64 {
     let width = input.find('\n').unwrap();
-    let height = input.len()/(width+1);
+    let height = input.len() / (width + 1);
     let gridvec = input.lines().flat_map(|line| line.chars()).collect();
-    let grid = Grid { width, height, grid: gridvec };
+    let grid = Grid {
+        width,
+        height,
+        grid: gridvec,
+    };
     let re = Regex::new(r"[0-9]+").unwrap();
 
-    let partnumbers = re.captures_iter(&input).map(|cap| PartNumber::from_captures(&cap)).collect::<Vec<_>>();
-    let adjecents = partnumbers.iter().filter(|part| grid.has_nondot_neighbor(part));
+    let partnumbers = re
+        .captures_iter(&input)
+        .map(|cap| PartNumber::from_captures(&cap))
+        .collect::<Vec<_>>();
+    let adjecents = partnumbers
+        .iter()
+        .filter(|part| grid.has_nondot_neighbor(part));
     let actualpartnumbers = adjecents.map(|part| part.value);
 
     actualpartnumbers.sum()
 }
-
 
 pub fn task_two(input: String) -> u64 {
     todo!();
