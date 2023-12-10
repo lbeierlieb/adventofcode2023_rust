@@ -1,8 +1,6 @@
 use rayon::prelude::*;
-use std::io::BufRead;
 use std::str::Lines;
 
-use regex::Captures;
 use regex::Regex;
 
 #[derive(Debug)]

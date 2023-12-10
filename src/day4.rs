@@ -1,6 +1,5 @@
 use std::collections::HashMap;
 
-use regex::Captures;
 use regex::Regex;
 
 #[derive(Debug)]
