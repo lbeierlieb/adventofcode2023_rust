@@ -98,3 +98,20 @@ fn day7_task2() {
     let result = 5905;
     assert_eq!(result, crate::day7::task_two(input));
 }
+
+#[test]
+fn day8_task1() {
+    let input = read_to_string("inputs/day8_task1_test").unwrap();
+    let result = 2;
+    assert_eq!(result, crate::day8::task_one(input));
+    let input = read_to_string("inputs/day8_task1_test2").unwrap();
+    let result = 6;
+    assert_eq!(result, crate::day8::task_one(input));
+}
+
+#[test]
+fn day8_task2() {
+    let input = read_to_string("inputs/day8_task2_test").unwrap();
+    let result = 6;
+    assert_eq!(result, crate::day8::task_two(input));
+}
